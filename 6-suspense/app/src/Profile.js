@@ -1,6 +1,6 @@
-import React from "react";
-import gql from "graphql-tag";
-import { useQuery } from "react-apollo-hooks";
+import React from 'react';
+import gql from 'graphql-tag';
+import { useQuery } from 'react-apollo-hooks';
 
 const profileQuery = gql`
   {
@@ -13,10 +13,7 @@ const profileQuery = gql`
 `;
 
 function Profile() {
-  const { loading, data, error } = useQuery(profileQuery);
-  if (loading) {
-    return <div>Loading ...</div>;
-  }
+  const { data, error } = useQuery(profileQuery, { suspend: true });
   if (error) {
     return <div>Error: {error.message}</div>;
   }

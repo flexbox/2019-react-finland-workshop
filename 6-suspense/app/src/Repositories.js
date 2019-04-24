@@ -1,6 +1,6 @@
-import React from "react";
-import gql from "graphql-tag";
-import { useQuery } from "react-apollo-hooks";
+import React from 'react';
+import gql from 'graphql-tag';
+import { useQuery } from 'react-apollo-hooks';
 
 const repositoriesQuery = gql`
   {
@@ -16,10 +16,7 @@ const repositoriesQuery = gql`
 `;
 
 function Repositories() {
-  const { loading, data, error } = useQuery(repositoriesQuery);
-  if (loading) {
-    return <div>Loading ...</div>;
-  }
+  const { data, error } = useQuery(repositoriesQuery, { suspend: true });
   if (error) {
     return <div>Error: {error.message}</div>;
   }
