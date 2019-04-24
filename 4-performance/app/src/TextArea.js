@@ -1,5 +1,6 @@
-import React, { useRef, useLayoutEffect } from "react";
-import calculateNodeHeight from "./calculateNodeHeight";
+import React, { useRef, useLayoutEffect } from 'react';
+import calculateNodeHeight from './calculateNodeHeight';
+import { slowCalculation } from './calculations';
 
 function TextArea(props) {
   const textareaElement = useRef(null);
@@ -7,6 +8,11 @@ function TextArea(props) {
   useLayoutEffect(() => {
     const height = calculateNodeHeight(textareaElement.current);
     textareaElement.current.style.height = `${height}px`;
+
+    slowCalculation();
+    const t0 = performance.now();
+    const t1 = performance.now();
+    console.log(`useLayoutEffect: ${t1 - t0} ms`);
   });
 
   return (
